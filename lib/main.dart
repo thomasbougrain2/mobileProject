@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screens/main_screen.dart'; // Assurez-vous d'importer correctement le fichier main_screen.dart
+import 'screens/main_screen.dart'; // Assurez-vous que le chemin est correct
+import 'theme/app_theme.dart'; // Importez le fichier du thème
 
 void main() {
   runApp(MyApp());
@@ -10,10 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Votre titre d\'application',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MainScreen(), // Remplacez MyHomePage() par MainScreen()
+      theme: AppTheme.theme, // Utilisez le thème ici
+      home: MainScreen(),
     );
   }
 }
