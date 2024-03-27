@@ -1,7 +1,7 @@
 // series_page.dart
 
 import 'package:flutter/material.dart';
-import '/api_service.dart';
+import '../services/api_service.dart';
 import '/models/series.dart';
 
 
