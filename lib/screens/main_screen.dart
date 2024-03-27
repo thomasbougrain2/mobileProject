@@ -1,4 +1,10 @@
+// main_screen.dart
+
 import 'package:flutter/material.dart';
+import '/models/movie.dart';
+import '/models/series.dart';
+import 'movie_list_screen.dart';
+import 'series_list_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -31,18 +37,19 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget _getContent() {
-    // TODO Remplacer par les écrans
     switch (AppTabs.values[_currentTabPosition]) {
       case AppTabs.home:
         return const Center(child: Text('Home'));
       case AppTabs.comics:
         return const Center(child: Text('Comics'));
       case AppTabs.series:
-        return const Center(child: Text('Séries'));
+        return SeriesPage(); // Afficher la page des séries
       case AppTabs.movies:
-        return const Center(child: Text('Films'));
+        return MoviesPage(); // Afficher la page des films
       case AppTabs.search:
         return const Center(child: Text('Recherche'));
+      default:
+        return const SizedBox(); // Par défaut, renvoyer un widget vide
     }
   }
 }
