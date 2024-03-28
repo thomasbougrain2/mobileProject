@@ -1,16 +1,11 @@
-// main_screen.dart
-
 import 'package:flutter/material.dart';
-import '/models/movie.dart';
-import '/models/series.dart';
-import 'movie_list_screen.dart';
-import 'series_list_screen.dart';
+
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -37,59 +32,50 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget _getContent() {
+    // TODO Remplacer par les écrans
     switch (AppTabs.values[_currentTabPosition]) {
       case AppTabs.home:
-        return const Center(child: Text('Home'));
+        return const Center(child: Text('Home', style: TextStyle(color: Colors.white)));
       case AppTabs.comics:
-        return const Center(child: Text('Comics'));
+        return const Center(child: Text('Comics', style: TextStyle(color: Colors.white)));
       case AppTabs.series:
-        return SeriesPage(); // Afficher la page des séries
+        return const Center(child: Text('Séries', style: TextStyle(color: Colors.white)));
       case AppTabs.movies:
-        return MoviesPage(); // Afficher la page des films
+        return const Center(child: Text('Films', style: TextStyle(color: Colors.white)));
       case AppTabs.search:
-        return const Center(child: Text('Recherche'));
-      default:
-        return const SizedBox(); // Par défaut, renvoyer un widget vide
+        return const Center(child: Text('Recherche', style: TextStyle(color: Colors.white)));
     }
   }
 }
 
 enum AppTabs {
-  home,
-  comics,
-  series,
-  movies,
-  search,
+  home(
+    'Accueil',
+    Icons.home_outlined,
+  ),
+  comics(
+    'Comics',
+    Icons.library_books,
+  ),
+  series(
+    'Séries',
+    Icons.live_tv,
+  ),
+  movies(
+    'Films',
+    Icons.local_movies,
+  ),
+  search(
+    'Recherche',
+    Icons.search,
+  );
+
+  final String label;
+  final IconData icon;
+
+  const AppTabs(this.label, this.icon);
 }
 
-extension AppTabsExtension on AppTabs {
-  String get label {
-    switch (this) {
-      case AppTabs.home:
-        return 'Accueil';
-      case AppTabs.comics:
-        return 'Comics';
-      case AppTabs.series:
-        return 'Séries';
-      case AppTabs.movies:
-        return 'Films';
-      case AppTabs.search:
-        return 'Recherche';
-    }
-  }
 
-  IconData get icon {
-    switch (this) {
-      case AppTabs.home:
-        return Icons.home;
-      case AppTabs.comics:
-        return Icons.book;
-      case AppTabs.series:
-        return Icons.tv;
-      case AppTabs.movies:
-        return Icons.movie;
-      case AppTabs.search:
-        return Icons.search;
-    }
-  }
-}
+
+
