@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
-
-class Film {
+class Movie {
   final String title;
-  final String imageUrl;
   final String description;
+  final String imageUrl;
 
-  Film({
+  Movie({
     required this.title,
-    required this.imageUrl,
     required this.description,
+    required this.imageUrl,
   });
 }

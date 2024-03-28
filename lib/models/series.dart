@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
-
-class Serie {
+class Series {
   final String title;
-  final String imageUrl;
   final String description;
+  final String imageUrl;
 
-  Serie({
+  Series({
     required this.title,
-    required this.imageUrl,
     required this.description,
+    required this.imageUrl,
   });
 }

@@ -10,7 +10,7 @@ class MoviesPage extends StatefulWidget {
 }
 
 class _MoviesPageState extends State<MoviesPage> {
-  late Future<List<Film>> _moviesFuture;
+  late Future<List<Movie>> _moviesFuture;
 
   @override
   void initState() {
@@ -24,7 +24,7 @@ class _MoviesPageState extends State<MoviesPage> {
       appBar: AppBar(
         title: Text('Films'),
       ),
-      body: FutureBuilder<List<Film>>(
+      body: FutureBuilder<List<Movie>>(
         future: _moviesFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

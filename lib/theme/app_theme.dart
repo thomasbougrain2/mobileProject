@@ -9,7 +9,7 @@ class AppTheme {
       backgroundColor: const Color(0xFF15232E),
     ).copyWith(
       secondary: const Color(0xFFFF8100),
-      primary: const Color(0xFF15232E), // Utilisez primary au lieu de primaryColorDark
+      primary: const Color(0xFFFFFFFF), // Utilisez primary au lieu de primaryColorDark
       onPrimary: Colors.white, // Pour le texte sur le fond primaire
     );
 

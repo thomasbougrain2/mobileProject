@@ -13,7 +13,7 @@ class SeriesPage extends StatefulWidget {
 }
 
 class _SeriesPageState extends State<SeriesPage> {
-  late Future<List<Serie>> _seriesFuture;
+  late Future<List<Series>> _seriesFuture;
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _SeriesPageState extends State<SeriesPage> {
       appBar: AppBar(
         title: Text('Séries'),
       ),
-      body: FutureBuilder<List<Serie>>(
+      body: FutureBuilder<List<Series>>(
         future: _seriesFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

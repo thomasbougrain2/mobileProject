@@ -1,58 +1,10 @@
-// main_screen.dart
-
 import 'package:flutter/material.dart';
-import '/models/movie.dart';
-import '/models/series.dart';
-import 'movie_list_screen.dart';
-import 'series_list_screen.dart';
-
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
-
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int _currentTabPosition = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _getContent(),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentTabPosition,
-        type: BottomNavigationBarType.fixed,
-        items: AppTabs.values
-            .map((tab) =>
-            BottomNavigationBarItem(label: tab.label, icon: Icon(tab.icon)))
-            .toList(growable: false),
-        onTap: (int position) {
-          setState(() {
-            _currentTabPosition = position;
-          });
-        },
-      ),
-    );
-  }
-
-  Widget _getContent() {
-    switch (AppTabs.values[_currentTabPosition]) {
-      case AppTabs.home:
-        return const Center(child: Text('Home'));
-      case AppTabs.comics:
-        return const Center(child: Text('Comics'));
-      case AppTabs.series:
-        return SeriesPage(); // Afficher la page des séries
-      case AppTabs.movies:
-        return MoviesPage(); // Afficher la page des films
-      case AppTabs.search:
-        return const Center(child: Text('Recherche'));
-      default:
-        return const SizedBox(); // Par défaut, renvoyer un widget vide
-    }
-  }
-}
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poject/screens/movie_list_screen.dart';
+import 'package:poject/screens/series_list_screen.dart';
+import '../blocs/navigation/navigation_bloc.dart';
+import '../blocs/navigation/navigation_event.dart';
+import '../blocs/navigation/navigation_state.dart';
 
 enum AppTabs {
   home,
@@ -61,7 +13,6 @@ enum AppTabs {
   movies,
   search,
 }
-
 extension AppTabsExtension on AppTabs {
   String get label {
     switch (this) {
@@ -81,15 +32,93 @@ extension AppTabsExtension on AppTabs {
   IconData get icon {
     switch (this) {
       case AppTabs.home:
-        return Icons.home;
+        return Icons.home_outlined;
       case AppTabs.comics:
-        return Icons.book;
+        return Icons.library_books;
       case AppTabs.series:
-        return Icons.tv;
+        return Icons.live_tv;
       case AppTabs.movies:
-        return Icons.movie;
+        return Icons.local_movies;
       case AppTabs.search:
         return Icons.search;
+    }
+  }
+}
+
+class MainScreen extends StatelessWidget {
+  const MainScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<NavigationBloc, NavigationState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: _getContent(state),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentIndex(state),
+            type: BottomNavigationBarType.fixed,
+            items: AppTabs.values
+                .map((tab) => BottomNavigationBarItem(
+              label: tab.label,
+              icon: Icon(tab.icon),
+            ))
+                .toList(growable: false),
+            onTap: (index) {
+              final event = _mapIndexToNavigationEvent(index);
+              context.read<NavigationBloc>().add(event);
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _getContent(NavigationState state) {
+    if (state is HomeNavigationState) {
+      return const Center(child: Text('Home'));
+    } else if (state is ComicsListNavigationState) {
+      return const Center(child: Text('Comics'));
+    } else if (state is SeriesListNavigationState) {
+      return SeriesPage();
+    } else if (state is MoviesListNavigationState) {
+      return MoviesPage();
+    } else if (state is CharacterDetailsNavigationState) {
+      return const Center(child: Text('Character'));
+    } else {
+      return const SizedBox();
+    }
+  }
+
+  int _currentIndex(NavigationState state) {
+    if (state is HomeNavigationState) {
+      return AppTabs.home.index;
+    } else if (state is ComicsListNavigationState) {
+      return AppTabs.comics.index;
+    } else if (state is SeriesListNavigationState) {
+      return AppTabs.series.index;
+    } else if (state is MoviesListNavigationState) {
+      return AppTabs.movies.index;
+    } else if (state is CharacterDetailsNavigationState) {
+      return AppTabs.search.index;
+    } else {
+      return 0;
+    }
+  }
+
+  NavigationEvent _mapIndexToNavigationEvent(int index) {
+    switch (index) {
+      case 0:
+        return NavigateToHomeEvent();
+      case 1:
+        return NavigateToComicsListEvent();
+      case 2:
+        return NavigateToSeriesListEvent();
+      case 3:
+        return NavigateToMoviesListEvent();
+      case 4:
+        return NavigateToCharacterDetailsEvent();
+      default:
+        return NavigateToHomeEvent();
     }
   }
 }
