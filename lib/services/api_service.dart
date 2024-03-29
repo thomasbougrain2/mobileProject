@@ -10,21 +10,17 @@ class ApiService {
   static const String baseUrl = 'https://api.formation-android.fr/comicvine';
 
   static Future<List<Movie>> fetchMovies() async {
-    final url = '$baseUrl?url=movies&api_key=$apiKey&format=json';
-
-    final response = await http.get(Uri.parse(url));
+    // Remarquez comment l'URL est construite ici avec les paramètres encodés.
+    final url = Uri.parse('$baseUrl?url=movies&api_key=$apiKey&format=json');
+    final response = await http.get(url);
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['results'];
-      return data.map((movie) {
-        return Movie(
-          title: movie['name'] ?? '', // Correction ici
-          imageUrl: movie['image']['medium_url'] ?? '',
-          description: movie['description'] ?? '',
-        );
-      }).toList();
+      return data.map((movieData) => Movie.fromJson(movieData)).toList();
     } else {
-      throw Exception('Failed to load movies');
+      print('Request failed with status: ${response.statusCode}.');
+      print('Response body: ${response.body}');
+      throw Exception('Failed to load movies with status code: ${response.statusCode}');
     }
   }
 
