@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'blocs/series/series_bloc.dart'; // Assurez-vous d'importer le bon fichier
 import 'blocs/movie/movie_bloc.dart';
 import 'blocs/navigation/navigation_bloc.dart';
 import 'screens/main_screen.dart';
@@ -19,8 +20,11 @@ class MyApp extends StatelessWidget {
           create: (context) => NavigationBloc(),
         ),
         BlocProvider<MovieBloc>(
-          // Assurez-vous de passer une instance d'ApiService ici
           create: (context) => MovieBloc(ApiService()),
+        ),
+        // Ajouter le BlocProvider pour SeriesBloc ici
+        BlocProvider<SeriesBloc>(
+          create: (context) => SeriesBloc(ApiService()),
         ),
       ],
       child: MaterialApp(
