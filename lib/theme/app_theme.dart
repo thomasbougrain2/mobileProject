@@ -36,6 +36,7 @@ class AppTheme {
       scaffoldBackgroundColor: const Color(0xFF15232E),
       appBarTheme: AppBarTheme(
         backgroundColor: const Color(0xFF15232E),
+        iconTheme: const IconThemeData(color: Colors.white),
         // Corrigez en fournissant directement un TextStyle à toolbarTextStyle et titleTextStyle
         toolbarTextStyle: GoogleFonts.nunito(
           color: Colors.white,

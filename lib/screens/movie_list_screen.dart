@@ -41,8 +41,12 @@ class MoviesPage extends StatelessWidget {
                     title: Text(movie.title, style: TextStyle(color: Colors.white)),
                     subtitle: Text('${movie.runtime} minutes | ${movie.year}', style: const TextStyle(color: Colors.grey)),
                     onTap: () {
-                      context.read<MovieBloc>().add(MovieSelected(movie));
-                      context.read<NavigationBloc>().add(NavigateToMovieDetailsEvent(movie: movie));  // S'assurer que cette ligne est correcte
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MovieDetailsScreen(movie: movie),
+                        ),
+                      );
                     },
                   ),
                 );
