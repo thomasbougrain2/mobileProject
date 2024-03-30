@@ -1,5 +1,7 @@
+// blocs/navigation/navigation_bloc.dart
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import '../../models/movie.dart';
 import 'navigation_event.dart';
 import 'navigation_state.dart';
 
@@ -18,12 +20,12 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
       yield MoviesListNavigationState();
     } else if (event is NavigateToCharacterDetailsEvent) {
       yield CharacterDetailsNavigationState();
-    } else if (event is NavigateToComicDetailsEvent) {
-      yield ComicDetailsNavigationState();
-    } else if (event is NavigateToSeriesDetailsEvent) {
-      yield SeriesDetailsNavigationState();
     } else if (event is NavigateToMovieDetailsEvent) {
-      yield MovieDetailsNavigationState();
+      yield MovieDetailsNavigationState(movie: event.movie);
     }
+    // Ajouter d'autres cas si nécessaire
   }
 }
+
+// Assurez-vous d'ajouter le nécessaire dans navigation_event.dart et navigation_state.dart pour gérer cet événement.
+

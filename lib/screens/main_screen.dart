@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poject/screens/movie_list_screen.dart';
-import 'package:poject/screens/series_list_screen.dart';
 import '../blocs/navigation/navigation_bloc.dart';
 import '../blocs/navigation/navigation_event.dart';
 import '../blocs/navigation/navigation_state.dart';
+import 'movie_details_screen.dart';
+import 'movie_list_screen.dart';
+import 'series_list_screen.dart';
+import 'character_details_screen.dart'; // Assurez-vous que vous avez ce fichier
 
 enum AppTabs {
   home,
@@ -13,6 +15,7 @@ enum AppTabs {
   movies,
   search,
 }
+
 extension AppTabsExtension on AppTabs {
   String get label {
     switch (this) {
@@ -26,6 +29,8 @@ extension AppTabsExtension on AppTabs {
         return 'Films';
       case AppTabs.search:
         return 'Recherche';
+      default:
+        return '';
     }
   }
 
@@ -41,6 +46,8 @@ extension AppTabsExtension on AppTabs {
         return Icons.local_movies;
       case AppTabs.search:
         return Icons.search;
+      default:
+        return Icons.error;
     }
   }
 }
@@ -50,26 +57,38 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NavigationBloc, NavigationState>(
-      builder: (context, state) {
-        return Scaffold(
-          body: _getContent(state),
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _currentIndex(state),
-            type: BottomNavigationBarType.fixed,
-            items: AppTabs.values
-                .map((tab) => BottomNavigationBarItem(
-              label: tab.label,
-              icon: Icon(tab.icon),
-            ))
-                .toList(growable: false),
-            onTap: (index) {
-              final event = _mapIndexToNavigationEvent(index);
-              context.read<NavigationBloc>().add(event);
-            },
-          ),
-        );
+    return BlocListener<NavigationBloc, NavigationState>(
+      listener: (context, state) {
+        if (state is MovieDetailsNavigationState && state.movie != null) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => MovieDetailsScreen(movie: state.movie),
+            ),
+          );
+        }
+        // Ajouter des gestionnaires pour d'autres états de navigation si nécessaire
       },
+      child: BlocBuilder<NavigationBloc, NavigationState>(
+        builder: (context, state) {
+          return Scaffold(
+            body: _getContent(state),
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: _currentIndex(state),
+              type: BottomNavigationBarType.fixed,
+              items: AppTabs.values
+                  .map((tab) => BottomNavigationBarItem(
+                label: tab.label,
+                icon: Icon(tab.icon),
+              ))
+                  .toList(),
+              onTap: (index) {
+                final event = _mapIndexToNavigationEvent(index);
+                context.read<NavigationBloc>().add(event);
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -77,15 +96,17 @@ class MainScreen extends StatelessWidget {
     if (state is HomeNavigationState) {
       return const Center(child: Text('Home'));
     } else if (state is ComicsListNavigationState) {
-      return const Center(child: Text('Comics'));
+      // Assurez-vous que la classe pour cet écran est correctement définie et importée.
+      return const Center(child: Text('Comics List'));
     } else if (state is SeriesListNavigationState) {
-      return SeriesPage();
+      return SeriesPage();  // Utilisation du bon nom de classe
     } else if (state is MoviesListNavigationState) {
-      return MoviesPage();
+      return MoviesPage();  // Le widget pour l'écran de liste de films
     } else if (state is CharacterDetailsNavigationState) {
-      return const Center(child: Text('Character'));
+      // Pour naviguer vers la liste de tous les personnages
+      return AllCharactersScreen();  // Assurez-vous que vous avez importé AllCharactersScreen
     } else {
-      return const SizedBox();
+      return const SizedBox.shrink();
     }
   }
 
