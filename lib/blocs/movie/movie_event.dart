@@ -18,4 +18,4 @@ class MovieSelected extends MovieEvent {
   List<Object> get props => [movie];
 }
 
-// Ajouter d'autres événements si nécessaire
+

@@ -27,7 +27,7 @@ class SeriesDetailsScreen extends StatelessWidget {
             },
           ),
           bottom: TabBar(
-            labelColor: Colors.white, // Couleur du texte de l'onglet sélectionné
+            labelColor: Colors.white,
             unselectedLabelColor: Colors.white.withOpacity(0.5),
             tabs: [
               Tab(text: 'Synopsis'),

@@ -1,4 +1,3 @@
-// models/comic.dart
 class Comic {
   final int id;
   final String name;
@@ -7,7 +6,7 @@ class Comic {
   final String coverDate;
   final int issueNumber;
   final List<String> characters;
-  final List<String> authors; // Ajout de la liste d'auteurs
+  final List<String> authors;
 
   Comic({
     required this.id,
@@ -17,7 +16,7 @@ class Comic {
     required this.coverDate,
     required this.issueNumber,
     required this.characters,
-    required this.authors, // Initialisation de la liste d'auteurs
+    required this.authors,
   });
 
   factory Comic.fromJson(Map<String, dynamic> json) {
@@ -31,7 +30,7 @@ class Comic {
       characters: (json['characters'] as List<dynamic>?)
           ?.map((character) => character['name'] as String)
           .toList() ?? [],
-      authors: [], // Initialisation de la liste d'auteurs
+      authors: [],
     );
   }
 }

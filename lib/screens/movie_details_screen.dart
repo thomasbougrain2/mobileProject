@@ -38,19 +38,18 @@ class MovieDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3, // Nombre d'onglets
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: Text(movie.title),
-          // Ajoutez le bouton de retour à l'AppBar
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pop(context); // Retour à la page précédente dans la pile de navigation
+              Navigator.pop(context);
             },
           ),
           bottom: TabBar(
-            labelColor: Colors.white, // Couleur du texte de l'onglet sélectionné
+            labelColor: Colors.white,
             unselectedLabelColor: Colors.white.withOpacity(0.5),
             tabs: [
               Tab(text: 'Synopsis'),

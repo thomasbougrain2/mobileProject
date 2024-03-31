@@ -3,18 +3,17 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static ThemeData get theme {
-    // Utilisez ColorScheme pour définir les couleurs primaires, secondaires, etc.
     final ColorScheme colorScheme = ColorScheme.fromSwatch(
       primarySwatch: Colors.blue,
       backgroundColor: const Color(0xFF15232E),
     ).copyWith(
       secondary: const Color(0xFFFF8100),
-      primary: const Color(0xFFFFFFFF), // Utilisez primary au lieu de primaryColorDark
-      onPrimary: Colors.white, // Pour le texte sur le fond primaire
+      primary: const Color(0xFFFFFFFF),
+      onPrimary: Colors.white,
     );
 
     return ThemeData(
-      useMaterial3: true, // Assurez-vous d'utiliser Material 3 pour accéder aux dernières fonctionnalités
+      useMaterial3: true,
       colorScheme: colorScheme,
       textTheme: GoogleFonts.nunitoTextTheme(
         const TextTheme(
@@ -37,17 +36,16 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         backgroundColor: const Color(0xFF15232E),
         iconTheme: const IconThemeData(color: Colors.white),
-        // Corrigez en fournissant directement un TextStyle à toolbarTextStyle et titleTextStyle
         toolbarTextStyle: GoogleFonts.nunito(
           color: Colors.white,
           fontSize: 20,
           fontWeight: FontWeight.w500,
-        ), // Directement un TextStyle sans .bodyText2
+        ),
         titleTextStyle: GoogleFonts.nunito(
           color: Colors.white,
           fontSize: 20,
           fontWeight: FontWeight.w600,
-        ), // Directement un TextStyle sans .headline6
+        ),
       ),
 
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(

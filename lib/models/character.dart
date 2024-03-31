@@ -2,9 +2,9 @@ class Character {
   final String name;
   final String description;
   final String imageUrl;
-  final List<String> series; // Liste des séries dans lesquelles le personnage a joué
-  final List<String> movies; // Liste des films dans lesquels le personnage a joué
-  final List<String> comics; // Liste des films dans lesquels le personnage a joué
+  final List<String> series;
+  final List<String> movies;
+  final List<String> comics;
 
 
   Character({

@@ -29,4 +29,3 @@ class ComicsLoadFailure extends ComicState {
   List<Object> get props => [errorMessage];
 }
 
-// Ajouter d'autres états si nécessaire

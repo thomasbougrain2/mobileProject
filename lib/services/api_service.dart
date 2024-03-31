@@ -17,7 +17,6 @@ class ApiService {
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['results'];
-      // Limitez les résultats à 50 en utilisant la méthode sublist
       final List<dynamic> limitedData = data.length > 50 ? data.sublist(0, 50) : data;
       return limitedData.map((movieData) => Movie.fromJson(movieData)).toList();
     } else {
@@ -32,7 +31,6 @@ class ApiService {
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['results'];
-      // Limit the results to 50 using the sublist method
       final List<dynamic> limitedData = data.length > 50 ? data.sublist(0, 50) : data;
       return limitedData.map((seriesData) => Series.fromJson(seriesData)).toList();
     } else {
@@ -49,7 +47,6 @@ class ApiService {
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['results'];
-      // Limiter les résultats à 50 en utilisant la méthode sublist
       final List<dynamic> limitedData = data.length > 50 ? data.sublist(0, 50) : data;
       return limitedData.map((episodeData) => Episode.fromJson(episodeData)).toList();
     } else {
@@ -68,17 +65,14 @@ class ApiService {
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['results'];
       return data.map((character) {
-        // Récupération de la liste des séries associées à chaque personnage
         final List<dynamic> seriesData = character['series'] ?? [];
         final List<String> seriesNames =
         seriesData.map((series) => series['name'].toString()).toList();
 
-        // Récupération de la liste des films associés à chaque personnage
         final List<dynamic> moviesData = character['movies'] ?? [];
         final List<String> moviesNames =
         moviesData.map((movie) => movie['title'].toString()).toList();
 
-        // Récupération de la liste des comics associés à chaque personnage
         final List<dynamic> comicsData = character['comics'] ?? [];
         final List<String> comicsNames =
         comicsData.map((comic) => comic['title'].toString()).toList();
@@ -104,7 +98,6 @@ class ApiService {
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['results'];
-      // Limit the results to 50 using the sublist method
       final List<dynamic> limitedData = data.length > 50 ? data.sublist(0, 50) : data;
       return limitedData.map((comicData) => Comic.fromJson(comicData)).toList();
     } else {
@@ -114,7 +107,6 @@ class ApiService {
     }
   }
 
-  // Fonction pour récupérer une liste de personnes
   static Future<List<Person>> fetchPersons(List<int> personIds) async {
     final List<Person> persons = [];
 

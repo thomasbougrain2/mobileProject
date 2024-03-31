@@ -29,4 +29,4 @@ class MoviesLoadFailure extends MovieState {
   List<Object> get props => [errorMessage];
 }
 
-// Ajouter d'autres états si nécessaire
+

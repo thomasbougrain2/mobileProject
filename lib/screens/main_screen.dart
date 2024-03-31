@@ -67,7 +67,6 @@ class MainScreen extends StatelessWidget {
             ),
           );
         }
-        // Ajouter des gestionnaires pour d'autres états de navigation si nécessaire
       },
       child: BlocBuilder<NavigationBloc, NavigationState>(
         builder: (context, state) {
@@ -97,15 +96,13 @@ class MainScreen extends StatelessWidget {
     if (state is HomeNavigationState) {
       return const Center(child: Text('Home'));
     } else if (state is ComicsListNavigationState) {
-      // Assurez-vous que la classe pour cet écran est correctement définie et importée.
       return ComicsPage();
     } else if (state is SeriesListNavigationState) {
-      return SeriesPage();  // Utilisation du bon nom de classe
+      return SeriesPage();
     } else if (state is MoviesListNavigationState) {
-      return MoviesPage();  // Le widget pour l'écran de liste de films
+      return MoviesPage();
     } else if (state is CharacterDetailsNavigationState) {
-      // Pour naviguer vers la liste de tous les personnages
-      return AllCharactersScreen();  // Assurez-vous que vous avez importé AllCharactersScreen
+      return AllCharactersScreen();
     } else {
       return const SizedBox.shrink();
     }
