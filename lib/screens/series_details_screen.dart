@@ -9,6 +9,10 @@ class SeriesDetailsScreen extends StatelessWidget {
 
   SeriesDetailsScreen({Key? key, required this.series}) : super(key: key);
 
+  String stripHtmlIfNeeded(String text) {
+    return text.replaceAll(RegExp(r'<[^>]*>|&[^;]+;'), '');
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -23,6 +27,8 @@ class SeriesDetailsScreen extends StatelessWidget {
             },
           ),
           bottom: TabBar(
+            labelColor: Colors.white, // Couleur du texte de l'onglet sélectionné
+            unselectedLabelColor: Colors.white.withOpacity(0.5),
             tabs: [
               Tab(text: 'Synopsis'),
               Tab(text: 'Personnages'),
@@ -43,7 +49,7 @@ class SeriesDetailsScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8),
-                    Text(series.description),
+                    Text(stripHtmlIfNeeded(series.description)),
                   ],
                 ),
               ),
