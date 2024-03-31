@@ -5,7 +5,7 @@ import '../models/series.dart';
 import '../models/character.dart';
 import '../models/comic.dart';
 import '../models/episode.dart';
-
+import '../models/person.dart';
 
 class ApiService {
   static const String apiKey = 'd00f1b0d69e0a383e908895ced56fe9331a847bb';
@@ -78,12 +78,18 @@ class ApiService {
         final List<String> moviesNames =
         moviesData.map((movie) => movie['title'].toString()).toList();
 
+        // Récupération de la liste des comics associés à chaque personnage
+        final List<dynamic> comicsData = character['comics'] ?? [];
+        final List<String> comicsNames =
+        comicsData.map((comic) => comic['title'].toString()).toList();
+
         return Character(
           name: character['name'],
           imageUrl: character['image']['medium_url'] ?? '',
           description: character['description'] ?? '',
           series: seriesNames,
           movies: moviesNames,
+          comics: comicsNames,
         );
       }).toList();
     } else {
@@ -91,23 +97,44 @@ class ApiService {
     }
   }
 
+   static Future<List<Comic>> fetchComics() async {
+    final url = Uri.parse('$baseUrl?url=issues&api_key=$apiKey&format=json');
 
-  static Future<List<Comic>> fetchComics() async {
-    final url = '$baseUrl?url=issues&api_key=$apiKey&format=json';
-
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(url);
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['results'];
-      return data.map((comic) {
-        return Comic(
-          title: comic['name'],
-          imageUrl: comic['image']['medium_url'] ?? '',
-          description: comic['description'] ?? '',
-        );
-      }).toList();
+      // Limit the results to 50 using the sublist method
+      final List<dynamic> limitedData = data.length > 50 ? data.sublist(0, 50) : data;
+      return limitedData.map((comicData) => Comic.fromJson(comicData)).toList();
     } else {
-      throw Exception('Failed to load comics');
+      print('Request failed with status: ${response.statusCode}.');
+      print('Response body: ${response.body}');
+      throw Exception('Failed to load comics with status code: ${response.statusCode}');
     }
   }
+
+  // Fonction pour récupérer une liste de personnes
+  static Future<List<Person>> fetchPersons(List<int> personIds) async {
+    final List<Person> persons = [];
+
+    for (final personId in personIds) {
+      final url = '$baseUrl/person/$personId?api_key=$apiKey&format=json';
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body)['results'];
+        final person = Person.fromJson(jsonData);
+        persons.add(person);
+      } else {
+        print('Failed to load person with ID: $personId');
+      }
+    }
+
+    return persons;
+  }
+
+
+
+
 }

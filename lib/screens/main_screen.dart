@@ -6,7 +6,8 @@ import '../blocs/navigation/navigation_state.dart';
 import 'movie_details_screen.dart';
 import 'movie_list_screen.dart';
 import 'series_list_screen.dart';
-import 'character_details_screen.dart'; // Assurez-vous que vous avez ce fichier
+import 'comic_list_screen.dart';
+import 'character_details_screen.dart';
 
 enum AppTabs {
   home,
@@ -97,7 +98,7 @@ class MainScreen extends StatelessWidget {
       return const Center(child: Text('Home'));
     } else if (state is ComicsListNavigationState) {
       // Assurez-vous que la classe pour cet écran est correctement définie et importée.
-      return const Center(child: Text('Comics List'));
+      return ComicsPage();
     } else if (state is SeriesListNavigationState) {
       return SeriesPage();  // Utilisation du bon nom de classe
     } else if (state is MoviesListNavigationState) {
