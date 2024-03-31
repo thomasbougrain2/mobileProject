@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'blocs/series/series_bloc.dart'; // Assurez-vous d'importer le bon fichier
+import 'blocs/search/search_bloc.dart';
+import 'blocs/series/series_bloc.dart';
 import 'blocs/movie/movie_bloc.dart';
 import 'blocs/navigation/navigation_bloc.dart';
 import 'screens/main_screen.dart';
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
         // Ajouter le BlocProvider pour SeriesBloc ici
         BlocProvider<SeriesBloc>(
           create: (context) => SeriesBloc(ApiService()),
+        ),
+        BlocProvider<SearchBloc>(
+          create: (context) => SearchBloc(ApiService()),
         ),
       ],
       child: MaterialApp(

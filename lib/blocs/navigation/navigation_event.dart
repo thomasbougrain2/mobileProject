@@ -12,7 +12,7 @@ class NavigateToSeriesListEvent extends NavigationEvent {}
 
 class NavigateToMoviesListEvent extends NavigationEvent {}
 
-class NavigateToCharacterDetailsEvent extends NavigationEvent {}
+class NavigateToSearchScreenEvent extends NavigationEvent {}
 
 class NavigateToComicDetailsEvent extends NavigationEvent {}
 

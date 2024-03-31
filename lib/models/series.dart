@@ -1,4 +1,4 @@
-import 'episode.dart'; // Assurez-vous d'importer correctement la classe Episode depuis le fichier episode.dart
+import 'episode.dart';
 class Series {
   final int id;
   final String title;
@@ -7,7 +7,7 @@ class Series {
   final String year;
   final int episodeCount;
   final List<String> characters;
-  final List<Episode> episodes; // Ajout de la liste d'épisodes
+  final List<Episode> episodes;
 
   Series({
     required this.id,

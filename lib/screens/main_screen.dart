@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poject/screens/search_screen.dart';
 import '../blocs/navigation/navigation_bloc.dart';
 import '../blocs/navigation/navigation_event.dart';
 import '../blocs/navigation/navigation_state.dart';
 import 'movie_details_screen.dart';
 import 'movie_list_screen.dart';
 import 'series_list_screen.dart';
-import 'character_details_screen.dart'; // Assurez-vous que vous avez ce fichier
+import 'search_screen.dart';
 
 enum AppTabs {
   home,
@@ -66,7 +67,6 @@ class MainScreen extends StatelessWidget {
             ),
           );
         }
-        // Ajouter des gestionnaires pour d'autres états de navigation si nécessaire
       },
       child: BlocBuilder<NavigationBloc, NavigationState>(
         builder: (context, state) {
@@ -96,19 +96,18 @@ class MainScreen extends StatelessWidget {
     if (state is HomeNavigationState) {
       return const Center(child: Text('Home'));
     } else if (state is ComicsListNavigationState) {
-      // Assurez-vous que la classe pour cet écran est correctement définie et importée.
       return const Center(child: Text('Comics List'));
     } else if (state is SeriesListNavigationState) {
-      return SeriesPage();  // Utilisation du bon nom de classe
+      return SeriesPage();
     } else if (state is MoviesListNavigationState) {
-      return MoviesPage();  // Le widget pour l'écran de liste de films
-    } else if (state is CharacterDetailsNavigationState) {
-      // Pour naviguer vers la liste de tous les personnages
-      return AllCharactersScreen();  // Assurez-vous que vous avez importé AllCharactersScreen
+      return MoviesPage();
+    } else if (state is SearchScreenState) {
+      return Search_screen();
     } else {
       return const SizedBox.shrink();
     }
   }
+
 
   int _currentIndex(NavigationState state) {
     if (state is HomeNavigationState) {
@@ -119,7 +118,7 @@ class MainScreen extends StatelessWidget {
       return AppTabs.series.index;
     } else if (state is MoviesListNavigationState) {
       return AppTabs.movies.index;
-    } else if (state is CharacterDetailsNavigationState) {
+    } else if (state is SearchScreenState) {
       return AppTabs.search.index;
     } else {
       return 0;
@@ -137,9 +136,11 @@ class MainScreen extends StatelessWidget {
       case 3:
         return NavigateToMoviesListEvent();
       case 4:
-        return NavigateToCharacterDetailsEvent();
+        print("NavigateToSearchScreenEvent emitted");
+        return NavigateToSearchScreenEvent();
       default:
         return NavigateToHomeEvent();
     }
   }
+
 }

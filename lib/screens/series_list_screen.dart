@@ -29,7 +29,6 @@ class SeriesPage extends StatelessWidget {
                 final serie = series[index];
                 return InkWell(
                   onTap: () {
-                    // Assurez-vous que le nom du paramètre correspond à celui du constructeur de SeriesDetailsScreen
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -62,15 +61,15 @@ class SeriesPage extends StatelessWidget {
                             top: 14,
                             left: 14,
                             child: Container(
-                              width: 59.36, // Largeur de la pastille orange
-                              height: 40.49, // Hauteur de la pastille orange
+                              width: 59.36,
+                              height: 40.49,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: Color(0xFFFF8100), // Pastille orange
-                                borderRadius: BorderRadius.circular(20), // Ajustez selon le design souhaité
+                                color: Color(0xFFFF8100),
+                                borderRadius: BorderRadius.circular(20),
                               ),
                               child: Text(
-                                '#${serie.id}', // ID de la série ici
+                                '#${serie.id}',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -113,7 +112,7 @@ class SeriesPage extends StatelessWidget {
           } else if (state is SeriesLoadFailure) {
             return Center(child: Text('Erreur de chargement des séries'));
           }
-          return SizedBox.shrink(); // pour les états initiaux et les autres états non gérés
+          return SizedBox.shrink();
         },
       ),
       backgroundColor: Color(0xFF15232E),

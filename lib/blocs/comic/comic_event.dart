@@ -18,4 +18,3 @@ class ComicSelected extends ComicEvent {
   List<Object> get props => [comic];
 }
 
-// Ajouter d'autres événements si nécessaire

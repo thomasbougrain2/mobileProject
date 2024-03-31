@@ -1,4 +1,3 @@
-// models/movie.dart
 class Movie {
   final int id;
   final String title;
@@ -22,10 +21,10 @@ class Movie {
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
-      id: json['id'] as int, // Assurez-vous que l'ID est de type int et assignez-le ici
+      id: json['id'] as int,
       title: json['name'] ?? 'Titre non disponible',
       imageUrl: json['image']['medium_url'] ?? '',
-      runtime: json['runtime']?.toString() ?? '0', // Convertissez en String pour la cohérence
+      runtime: json['runtime']?.toString() ?? '0',
       releaseDate: json['release_date'] ?? '',
       description: json['description'] ?? 'Description non disponible',
       characters: (json['characters'] as List<dynamic>?)
@@ -38,6 +37,4 @@ class Movie {
   String get year {
     return releaseDate.isNotEmpty ? releaseDate.split('-')[0] : 'Inconnu';
   }
-
-// Reste de votre classe...
 }

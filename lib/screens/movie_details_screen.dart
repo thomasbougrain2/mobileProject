@@ -15,11 +15,10 @@ class MovieDetailsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(movie.title),
-          // Ajoutez le bouton de retour à l'AppBar
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pop(context); // Retour à la page précédente dans la pile de navigation
+              Navigator.pop(context);
             },
           ),
           bottom: TabBar(

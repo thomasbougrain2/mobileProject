@@ -2,16 +2,20 @@ class Character {
   final String name;
   final String description;
   final String imageUrl;
-  final List<String> series; // Liste des séries dans lesquelles le personnage a joué
-  final List<String> movies; // Liste des films dans lesquels le personnage a joué
-
 
   Character({
     required this.name,
     required this.description,
     required this.imageUrl,
-    required this.series,
-    required this.movies,
-
   });
+
+  factory Character.fromJson(Map<String, dynamic> json) {
+    return Character(
+      name: json['name'] as String? ?? 'Unknown',
+      imageUrl: json['image']?['medium_url'] as String? ??
+          'https://example.com/default_character.png', // URL par défaut pour les images
+      description: json['description'] as String? ?? 'No biography available',
+    );
+  }
+
 }

@@ -19,4 +19,3 @@ class CharacterSelected extends CharacterEvent {
   List<Object> get props => [character];
 }
 
-// Ajouter d'autres événements si nécessaire

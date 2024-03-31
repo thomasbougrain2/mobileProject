@@ -24,7 +24,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
   Stream<MovieState> _mapLoadMoviesToState() async* {
     yield MoviesLoadInProgress();
     try {
-      final movies = await ApiService.fetchMovies();  // Appel statique correct
+      final movies = await ApiService.fetchMovies();
       yield MoviesLoadSuccess(movies);
     } catch (_) {
       yield MoviesLoadFailure('Failed to load movies');

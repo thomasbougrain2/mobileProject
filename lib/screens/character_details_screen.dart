@@ -37,7 +37,6 @@ class CharacterDetailsScreen extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Action à effectuer lorsque le bouton est pressé
               },
               child: Text('Button Text'),
             ),

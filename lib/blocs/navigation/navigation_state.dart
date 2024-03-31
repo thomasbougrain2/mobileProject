@@ -19,6 +19,8 @@ class ComicDetailsNavigationState extends NavigationState {}
 
 class SeriesDetailsNavigationState extends NavigationState {}
 
+class SearchScreenState extends NavigationState {}
+
 class MovieDetailsNavigationState extends NavigationState {
   final Movie movie;
 

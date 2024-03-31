@@ -29,4 +29,3 @@ class CharactersLoadFailure extends CharacterState {
   List<Object> get props => [errorMessage];
 }
 
-// Ajouter d'autres états si nécessaire
