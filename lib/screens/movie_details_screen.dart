@@ -8,6 +8,33 @@ class MovieDetailsScreen extends StatelessWidget {
 
   MovieDetailsScreen({Key? key, required this.movie}) : super(key: key);
 
+  String stripHtmlIfNeeded(String text) {
+    return text.replaceAll(RegExp(r'<[^>]*>|&[^;]+;'), '');
+  }
+
+  Widget infoRow(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: TextStyle(color: Colors.white),
+              textAlign: TextAlign.right,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -23,6 +50,8 @@ class MovieDetailsScreen extends StatelessWidget {
             },
           ),
           bottom: TabBar(
+            labelColor: Colors.white, // Couleur du texte de l'onglet sélectionné
+            unselectedLabelColor: Colors.white.withOpacity(0.5),
             tabs: [
               Tab(text: 'Synopsis'),
               Tab(text: 'Personnages'),
@@ -35,7 +64,7 @@ class MovieDetailsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SingleChildScrollView(
-                child: Text(movie.description),
+                child: Text(stripHtmlIfNeeded(movie.description)),
               ),
             ),
             FutureBuilder<List<Character>>(
@@ -55,7 +84,10 @@ class MovieDetailsScreen extends StatelessWidget {
                         leading: CircleAvatar(
                           backgroundImage: NetworkImage(character.imageUrl),
                         ),
-                        title: Text(character.name),
+                        title: Text(
+                            character.name,
+                            style: const TextStyle(color: Colors.white),
+                        ),
                       );
                     },
                   );
@@ -64,7 +96,20 @@ class MovieDetailsScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('Recettes au box-office: \$${movie.boxOfficeRevenue}'),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    infoRow('Classification', movie.rating),
+                    infoRow('Scénaristes', movie.writers.join(', ')),
+                    infoRow('Producteurs', movie.producers.join(', ')),
+                    infoRow('Studios', movie.studios.join(', ')),
+                    infoRow('Budget', '\$${movie.budget}'),
+                    infoRow('Recettes au box-office', '\$${movie.boxOfficeRevenue}'),
+                    infoRow('Recettes brutes totales', '\$${movie.totalRevenue}'),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
