@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# poject
+# project
 
 A new Flutter project.
 
