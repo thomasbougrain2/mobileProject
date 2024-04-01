@@ -60,15 +60,15 @@ class ComicsPage extends StatelessWidget {
                             top: 14,
                             left: 14,
                             child: Container(
-                              width: 59.36, // Largeur de la pastille orange
-                              height: 40.49, // Hauteur de la pastille orange
+                              width: 59.36,
+                              height: 40.49,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: Color(0xFFFF8100), // Pastille orange
-                                borderRadius: BorderRadius.circular(20), // Ajustez selon le design souhaité
+                                color: Color(0xFFFF8100),
+                                borderRadius: BorderRadius.circular(20),
                               ),
                               child: Text(
-                                '#${comic.id}', // ID du comic ici
+                                '#${comic.id}',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -112,7 +112,7 @@ class ComicsPage extends StatelessWidget {
           } else if (state is ComicsLoadFailure) {
             return Center(child: Text('Erreur: ${state.errorMessage}'));
           }
-          return SizedBox.shrink(); // État initial et autres non gérés
+          return SizedBox.shrink();
         },
       ),
       backgroundColor: Color(0xFF15232E),

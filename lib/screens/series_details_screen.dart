@@ -71,7 +71,10 @@ class SeriesDetailsScreen extends StatelessWidget {
                         leading: CircleAvatar(
                           backgroundImage: NetworkImage(character.imageUrl),
                         ),
-                        title: Text(character.name),
+                        title: Text(
+                          character.name,
+                          style: const TextStyle(color: Colors.white),
+                        ),
                       );
                     },
                   );
