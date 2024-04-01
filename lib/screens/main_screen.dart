@@ -5,6 +5,7 @@ import '../blocs/navigation/navigation_event.dart';
 import '../blocs/navigation/navigation_state.dart';
 import 'movie_details_screen.dart';
 import 'movie_list_screen.dart';
+import 'movies_series_list_screen.dart';
 import 'series_list_screen.dart';
 import 'comic_list_screen.dart';
 import 'character_details_screen.dart';
@@ -94,7 +95,7 @@ class MainScreen extends StatelessWidget {
 
   Widget _getContent(NavigationState state) {
     if (state is HomeNavigationState) {
-      return const Center(child: Text('Home'));
+      return MoviesSeriesPage();
     } else if (state is ComicsListNavigationState) {
       return ComicsPage();
     } else if (state is SeriesListNavigationState) {
