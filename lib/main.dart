@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<SeriesBloc>(
           create: (context) => SeriesBloc(ApiService()),
         ),
-        // Ajouter le BlocProvider pour ComicBloc ici
         BlocProvider<ComicBloc>(
           create: (context) => ComicBloc(ApiService()),
         ),

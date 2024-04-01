@@ -23,9 +23,7 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
     } else if (event is NavigateToMovieDetailsEvent) {
       yield MovieDetailsNavigationState(movie: event.movie);
     }
-    // Ajouter d'autres cas si nécessaire
   }
 }
 
-// Assurez-vous d'ajouter le nécessaire dans navigation_event.dart et navigation_state.dart pour gérer cet événement.
 
